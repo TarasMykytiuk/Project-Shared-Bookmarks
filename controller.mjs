@@ -5,6 +5,16 @@ export class Controller {
     }
 
     init() {
-        console.log("View: " + this.view.constructor.name + ", Model: " + this.model.constructor.name + ".");
+        this.view.addOptions(this.model.getUserIds());
+        this.view.elements.usrSelect.addEventListener("change", (event) => {
+            this.handleUserSelect();
+        })
+    }
+
+    handleUserSelect() {
+        const userId = this.view.elements.usrSelect.value;
+        const data = this.model.getData(userId);
+        this.view.clearList();
+        this.view.addListItems(data);
     }
 }
