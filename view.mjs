@@ -24,7 +24,9 @@ export class View {
         const list = this.elements.bookmarksList;
         values.forEach(value => {
             const item = document.createElement("li");
-            item.innerText = "Topic: " + value.topic + ", data: " + value.date + ".";
+            const topic = value.topic ? value.topic : "no topic";
+            const date = value.date ? value.date : "no date";
+            item.innerText = "Topic: " + topic + ", data: " + date + ".";
             list.appendChild(item);
         })
     }
