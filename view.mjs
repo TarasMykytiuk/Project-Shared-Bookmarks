@@ -21,6 +21,10 @@ export class View {
         });
     }
 
+    disableDefaultOption() {
+        this.elements.usrSelect.firstElementChild.setAttribute("disabled", true);
+    }
+
     clearList() {
         this.elements.bookmarksList.innerHTML = "";
     }

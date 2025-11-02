@@ -20,6 +20,7 @@ export class Controller {
     handleUserSelect() {
         const userId = this.view.elements.usrSelect.value;
         const data = this.model.getData(userId);
+        this.view.disableDefaultOption();
         this.view.displayList(data);
     }
 
