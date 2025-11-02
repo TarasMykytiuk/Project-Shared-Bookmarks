@@ -29,8 +29,8 @@ export class Controller {
         if (userId) {
             const bookmark = {
                 url: this.view.elements.url.value,
-                topic: this.view.elements.topic.value,
-                description: this.view.elements.url.value,
+                title: this.view.elements.title.value,
+                description: this.view.elements.description.value,
                 date: new Date()
             }
             const data = this.model.addBookmark(userId, bookmark);
