@@ -2,7 +2,12 @@ export class View {
     constructor() {
         this.elements = {
             usrSelect: document.getElementById("user_select"),
-            bookmarksList: document.getElementById("bookmarks_list")
+            bookmarksList: document.getElementById("bookmarks_list"),
+            form: document.getElementById("form"),
+            url: document.getElementById("url"),
+            topic: document.getElementById("topic"),
+            description: document.getElementById("description"),
+            formSubmit: document.getElementById("form_submit")
         }
     }
 
@@ -31,4 +36,14 @@ export class View {
         })
     }
 
+    displayList(data) {
+        if (data) {
+            this.clearList();
+            this.addListItems(data);
+        }
+    }
+
+    resetForm() {
+        this.elements.form.reset();
+    }
 }

@@ -10,10 +10,24 @@
 <body>
     <main>
         <section>
-            <label for="user_select">Language:</label>
+            <label for="user_select">User:</label>
             <select id="user_select" name="user_select">
                 <option value="">Select a user</option>
             </select>
+        </section>
+        <section>
+            <label for="form">
+                <h2>Create new bookmark:</h2>
+            </label>
+            <form id="form">
+                <label for="url">Enter url:</label>
+                <input id="url" name="url" required />
+                <label for="topic">Enter topic:</label>
+                <input id="topic" name="topic" required />
+                <label for="description">Enter description:</label>
+                <input id="description" name="description" required />
+                <button id="form_submit" type="submit">Add bookmark</button>
+            </form>
         </section>
         <section>
             <h1>Bookmarks: </h1>

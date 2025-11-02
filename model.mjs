@@ -3,6 +3,16 @@ export class Model {
 
     }
 
+    addBookmark(userId, bookmark) {
+        let data = this.getData(userId);
+        if (!data) {
+            data = []
+        }
+        data.push(bookmark);
+        this.setData(userId, data);
+        return this.getData(userId);
+    }
+
     /**
      * Get a list of user ids
      *
