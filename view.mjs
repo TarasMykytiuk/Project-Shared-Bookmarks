@@ -27,19 +27,22 @@ export class View {
 
     addListItems(values) {
         const list = this.elements.bookmarksList;
-        values.forEach(value => {
-            const item = document.createElement("li");
-            const topic = value.topic ? value.topic : "no topic";
-            const date = value.date ? value.date : "no date";
-            item.innerText = "Topic: " + topic + ", data: " + date + ".";
-            list.appendChild(item);
-        })
+        values.sort((a, b) => new Date(b.date) - new Date(a.date))
+            .forEach(value => {
+                const item = document.createElement("li");
+                const topic = value.topic ? value.topic : "no topic";
+                const date = value.date ? value.date : "no date";
+                item.innerText = "Topic: " + topic + ", data: " + date + ".";
+                list.appendChild(item);
+            })
     }
 
     displayList(data) {
+        this.clearList();
         if (data) {
-            this.clearList();
             this.addListItems(data);
+        } else {
+            this.elements.bookmarksList.textContent = "Selected user has no bookmarks.";
         }
     }
 
