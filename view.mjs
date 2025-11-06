@@ -11,6 +11,19 @@ export class View {
         }
     }
 
+    bindUserSelect(handler) {
+        this.elements.usrSelect.addEventListener("change", (event) => {
+            handler();
+        });
+    }
+
+    bindFormSubmit(handler) {
+        this.elements.formSubmit.addEventListener("click", (event) => {
+            event.preventDefault();
+            handler();
+        });
+    }
+
     addOptions(values) {
         const select = this.elements.usrSelect;
         values.forEach(value => {

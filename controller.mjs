@@ -6,15 +6,8 @@ export class Controller {
 
     init() {
         this.view.addOptions(this.model.getUserIds());
-
-        this.view.elements.usrSelect.addEventListener("change", (event) => {
-            this.handleUserSelect();
-        });
-
-        this.view.elements.formSubmit.addEventListener("click", (event) => {
-            event.preventDefault();
-            this.handleFormSubmit();
-        });
+        this.view.bindUserSelect(() => this.handleUserSelect());
+        this.view.bindFormSubmit(() => this.handleFormSubmit());
     }
 
     handleUserSelect() {
