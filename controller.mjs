@@ -11,21 +11,17 @@ export class Controller {
     }
 
     handleUserSelect() {
-        const userId = this.view.elements.usrSelect.value;
+        const userId = this.view.readUserSelect();
+        this.model.setCurrentUser(userId);
         const data = this.model.getData(userId);
         this.view.disableDefaultOption();
         this.view.displayList(data);
     }
 
     handleFormSubmit() {
-        const userId = this.view.elements.usrSelect.value;
+        const userId = this.model.getCurrentUser();
         if (userId) {
-            const bookmark = {
-                url: this.view.elements.url.value,
-                title: this.view.elements.title.value,
-                description: this.view.elements.description.value,
-                date: new Date()
-            }
+            const bookmark = this.view.collectFromData()
             const data = this.model.addBookmark(userId, bookmark);
             this.view.resetForm();
             this.view.displayList(data)

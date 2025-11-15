@@ -1,6 +1,15 @@
 export class Model {
+    #currentUser;
     constructor() {
+        this.#currentUser = null
+    }
 
+    getCurrentUser() {
+        return this.#currentUser;
+    }
+
+    setCurrentUser(userId) {
+        this.#currentUser = userId;
     }
 
     addBookmark(userId, bookmark) {

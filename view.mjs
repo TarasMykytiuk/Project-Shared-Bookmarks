@@ -1,6 +1,7 @@
 export class View {
+    #elements
     constructor() {
-        this.elements = {
+        this.#elements = {
             usrSelect: document.getElementById("user_select"),
             bookmarksList: document.getElementById("bookmarks_list"),
             form: document.getElementById("form"),
@@ -12,20 +13,34 @@ export class View {
     }
 
     bindUserSelect(handler) {
-        this.elements.usrSelect.addEventListener("change", (event) => {
-            handler();
+        this.#elements.usrSelect.addEventListener("change", (event) => {
+            const userId = this.readUserSelect();
+            handler(userId);
         });
     }
 
     bindFormSubmit(handler) {
-        this.elements.formSubmit.addEventListener("click", (event) => {
+        this.#elements.formSubmit.addEventListener("click", (event) => {
             event.preventDefault();
             handler();
         });
     }
 
+    readUserSelect() {
+        return this.#elements.usrSelect.value;
+    }
+
+    collectFromData() {
+        return {
+            url: this.#elements.url.value,
+            title: this.#elements.title.value,
+            description: this.#elements.description.value,
+            date: new Date()
+        }
+    }
+
     addOptions(values) {
-        const select = this.elements.usrSelect;
+        const select = this.#elements.usrSelect;
         values.forEach(value => {
             const option = document.createElement("option");
             option.value = value;
@@ -35,11 +50,11 @@ export class View {
     }
 
     disableDefaultOption() {
-        this.elements.usrSelect.firstElementChild.setAttribute("disabled", true);
+        this.#elements.usrSelect.firstElementChild.setAttribute("disabled", true);
     }
 
     clearList() {
-        this.elements.bookmarksList.innerHTML = "";
+        this.#elements.bookmarksList.innerHTML = "";
     }
 
     formatDate(date) {
@@ -67,7 +82,7 @@ export class View {
     }
 
     addListItems(values) {
-        const list = this.elements.bookmarksList;
+        const list = this.#elements.bookmarksList;
         values.sort((a, b) => new Date(b.date) - new Date(a.date))
             .forEach(value => {
                 const url = value.url;
@@ -84,11 +99,11 @@ export class View {
         if (data) {
             this.addListItems(data);
         } else {
-            this.elements.bookmarksList.textContent = "Selected user has no bookmarks.";
+            this.#elements.bookmarksList.textContent = "Selected user has no bookmarks.";
         }
     }
 
     resetForm() {
-        this.elements.form.reset();
+        this.#elements.form.reset();
     }
 }
