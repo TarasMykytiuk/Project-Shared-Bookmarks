@@ -4,6 +4,7 @@ export class View {
         this.#elements = {
             usrSelect: document.getElementById("user_select"),
             bookmarksList: document.getElementById("bookmarks_list"),
+            formContainer: document.getElementById("left"),
             form: document.getElementById("form"),
             url: document.getElementById("url"),
             title: document.getElementById("title"),
@@ -14,8 +15,7 @@ export class View {
 
     bindUserSelect(handler) {
         this.#elements.usrSelect.addEventListener("change", (event) => {
-            const userId = this.readUserSelect();
-            handler(userId);
+            handler();
         });
     }
 
@@ -28,6 +28,10 @@ export class View {
 
     readUserSelect() {
         return this.#elements.usrSelect.value;
+    }
+
+    showForm() {
+        this.#elements.formContainer.style.visibility = 'visible';
     }
 
     collectFromData() {
@@ -66,6 +70,7 @@ export class View {
 
     createBookmarkDom(url, title, description, formattedDate) {
         const div = document.createElement("div");
+        div.classList.add('bookmark');
         const titleHeader = document.createElement("h3");
         const titleLink = document.createElement("a");
         titleLink.setAttribute("href", url);

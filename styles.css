@@ -1,0 +1,89 @@
+body {
+    margin: 25px auto;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+main> :first-child {
+    grid-column: 1 / -1;
+}
+
+h2 {
+    margin: 5px 0;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section h2 {
+    text-align: center;
+}
+
+#left {
+    visibility: hidden;
+}
+
+form {
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+form input,
+form label {
+    width: 90%;
+    margin: 5px auto;
+}
+
+form button {
+    margin: 5px auto;
+    padding: 10px;
+}
+
+#user_select {
+    margin: 5px auto;
+    padding: 10px;
+}
+
+#user_select_container {
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#bookmarks_list {
+    overflow-y: scroll;
+    max-height: 100vh;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#bookmarks_list {
+    text-align: center;
+}
+
+.bookmark {
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: justify;
+}
+
+.bookmark a {
+    text-decoration: unset;
+    color: unset;
+}

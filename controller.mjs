@@ -15,18 +15,15 @@ export class Controller {
         this.model.setCurrentUser(userId);
         const data = this.model.getData(userId);
         this.view.disableDefaultOption();
+        this.view.showForm();
         this.view.displayList(data);
     }
 
     handleFormSubmit() {
         const userId = this.model.getCurrentUser();
-        if (userId) {
-            const bookmark = this.view.collectFromData()
-            const data = this.model.addBookmark(userId, bookmark);
-            this.view.resetForm();
-            this.view.displayList(data)
-        } else {
-            alert("You must select a user!");
-        }
+        const bookmark = this.view.collectFromData()
+        const data = this.model.addBookmark(userId, bookmark);
+        this.view.resetForm();
+        this.view.displayList(data);
     }
 }
