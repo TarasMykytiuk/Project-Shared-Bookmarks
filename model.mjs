@@ -12,7 +12,27 @@ export class Model {
         this.#currentUser = userId;
     }
 
+    isValidUrl(string) {
+        try {
+            return Boolean(new URL(string));
+        } catch (error) {
+            console.error("Bookmark link must be a valid url!");
+            throw new Error("Bookmark link must be a valid url!");
+        }
+    }
+
+    isFieldsFilled(bookmark) {
+        if (!bookmark.url || !bookmark.title || !bookmark.description) {
+            console.error("All field are required!");
+            throw new Error("All field are required!");
+        } else {
+            return true;
+        }
+    }
+
     addBookmark(userId, bookmark) {
+        try { this.isFieldsFilled(bookmark) } catch (error) { return false; }
+        try { this.isValidUrl(bookmark.url) } catch (error) { return false; }
         let data = this.getData(userId);
         if (!data) { data = [] };
         data.push(bookmark);

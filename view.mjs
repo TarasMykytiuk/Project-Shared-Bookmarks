@@ -9,7 +9,8 @@ export class View {
             url: document.getElementById("url"),
             title: document.getElementById("title"),
             description: document.getElementById("description"),
-            formSubmit: document.getElementById("form_submit")
+            formSubmit: document.getElementById("form_submit"),
+            errorsDom: document.getElementById("errors")
         }
     }
 
@@ -30,11 +31,23 @@ export class View {
         return this.#elements.usrSelect.value;
     }
 
+    displayError(message) {
+        this.#elements.errorsDom.textContent = message;
+    }
+
+    clearErrors() {
+        this.#elements.errorsDom.textContent = "";
+    }
+
     showForm() {
         this.#elements.formContainer.style.visibility = 'visible';
     }
 
-    collectFromData() {
+    checkFormValidity() {
+        return this.#elements.form.checkValidity()
+    }
+
+    collectFormData() {
         return {
             url: this.#elements.url.value,
             title: this.#elements.title.value,

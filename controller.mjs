@@ -20,10 +20,21 @@ export class Controller {
     }
 
     handleFormSubmit() {
+        this.view.clearErrors();
+        if (!this.view.checkFormValidity()) {
+            this.view.displayError("All field are required!");
+            return;
+        }
+        const bookmark = this.view.collectFormData();
+        try {
+            this.model.isValidUrl(bookmark.url);
+        } catch (error) {
+            this.view.displayError(error.message);
+            return;
+        }
         const userId = this.model.getCurrentUser();
-        const bookmark = this.view.collectFromData()
-        const data = this.model.addBookmark(userId, bookmark);
+        const bookmarksList = this.model.addBookmark(userId, bookmark);
         this.view.resetForm();
-        this.view.displayList(data);
+        this.view.displayList(bookmarksList);
     }
 }
