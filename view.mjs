@@ -114,7 +114,7 @@ export class View {
 
     displayList(data) {
         this.clearList();
-        if (data) {
+        if (data && data.length !== 0) {
             this.addListItems(data);
         } else {
             this.#elements.bookmarksList.textContent = "Selected user has no bookmarks.";

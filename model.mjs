@@ -31,8 +31,8 @@ export class Model {
     }
 
     addBookmark(userId, bookmark) {
-        try { this.isFieldsFilled(bookmark) } catch (error) { return false; }
-        try { this.isValidUrl(bookmark.url) } catch (error) { return false; }
+        try { this.isFieldsFilled(bookmark) } catch (error) { return []; }
+        try { this.isValidUrl(bookmark.url) } catch (error) { return []; }
         let data = this.getData(userId);
         if (!data) { data = [] };
         data.push(bookmark);

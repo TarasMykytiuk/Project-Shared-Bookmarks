@@ -12,6 +12,7 @@ export class Controller {
 
     handleUserSelect() {
         const userId = this.view.readUserSelect();
+        //this.model.clearData(userId);
         this.model.setCurrentUser(userId);
         const data = this.model.getData(userId);
         this.view.disableDefaultOption();
