@@ -32,7 +32,7 @@ test("A bookmark with empty fields must not be added", () => {
         date: new Date(2024, 2, 10, 2, 30)
     }
     let data = model.addBookmark(userId, bookmarkNoFields);
-    assert.deepStrictEqual(data, false);
+    assert.deepStrictEqual(data, []);
     model.clearData(userId);
 
     const bookmarkNoUrl = {
@@ -43,7 +43,7 @@ test("A bookmark with empty fields must not be added", () => {
     }
 
     data = model.addBookmark(userId, bookmarkNoUrl);
-    assert.deepStrictEqual(data, false);
+    assert.deepStrictEqual(data, []);
     model.clearData(userId);
 
     const bookmarkNoTitle = {
@@ -53,7 +53,7 @@ test("A bookmark with empty fields must not be added", () => {
         date: new Date(2024, 2, 10, 2, 30)
     }
     data = model.addBookmark(userId, bookmarkNoTitle);
-    assert.deepStrictEqual(data, false);
+    assert.deepStrictEqual(data, []);
     model.clearData(userId);
 
     const bookmarkNoDescription = {
@@ -63,7 +63,7 @@ test("A bookmark with empty fields must not be added", () => {
         date: new Date(2024, 2, 10, 2, 30)
     }
     data = model.addBookmark(userId, bookmarkNoDescription);
-    assert.deepStrictEqual(data, false);
+    assert.deepStrictEqual(data, []);
     model.clearData(userId);
 });
 
@@ -101,7 +101,7 @@ test("A bookmark with invalid url must not be added", () => {
     const userId = "0";
     model.clearData(userId);
     const data = model.addBookmark(userId, bookmark);
-    assert.deepStrictEqual(data, false);
+    assert.deepStrictEqual(data, []);
     model.clearData(userId);
 });
 

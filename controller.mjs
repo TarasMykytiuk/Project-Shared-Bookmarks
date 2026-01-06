@@ -5,19 +5,30 @@ export class Controller {
     }
 
     init() {
-        this.view.addOptions(this.model.getUserIds());
+        this.view.populateUserSelect(this.model.getUserIds());
+        this.view.populateLangSelect();
         this.view.bindUserSelect(() => this.handleUserSelect());
+        this.view.bindLangSelect(() => this.handleLangSelect());
         this.view.bindFormSubmit(() => this.handleFormSubmit());
     }
 
     handleUserSelect() {
         const userId = this.view.readUserSelect();
-        //this.model.clearData(userId);
         this.model.setCurrentUser(userId);
         const data = this.model.getData(userId);
         this.view.disableDefaultOption();
         this.view.showForm();
-        this.view.displayList(data);
+        const lang = this.view.readLangSelect();
+        this.view.displayList(data, lang);
+    }
+
+    handleLangSelect() {
+        const userId = this.view.readUserSelect();
+        if (userId) {
+            const data = this.model.getData(userId);
+            const lang = this.view.readLangSelect();
+            this.view.displayList(data, lang);
+        }
     }
 
     handleFormSubmit() {
@@ -36,6 +47,7 @@ export class Controller {
         const userId = this.model.getCurrentUser();
         const bookmarksList = this.model.addBookmark(userId, bookmark);
         this.view.resetForm();
-        this.view.displayList(bookmarksList);
+        const lang = this.view.readLangSelect();
+        this.view.displayList(bookmarksList, lang);
     }
 }
