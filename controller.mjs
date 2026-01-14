@@ -6,10 +6,8 @@ export class Controller {
 
     init() {
         this.view.populateUserSelect(this.model.getUserIds());
-        this.view.populateLangSelect();
         this.view.bindUserSelect(() => this.handleUserSelect());
-        this.view.bindLangSelect(() => this.handleLangSelect());
-        this.view.bindFormSubmit(() => this.handleFormSubmit());
+        this.view.bindFormSubmit((event) => this.handleFormSubmit(event));
     }
 
     handleUserSelect() {
@@ -18,20 +16,11 @@ export class Controller {
         const data = this.model.getData(userId);
         this.view.disableDefaultOption();
         this.view.showForm();
-        const lang = this.view.readLangSelect();
-        this.view.displayList(data, lang);
+        this.view.displayList(data);
     }
 
-    handleLangSelect() {
-        const userId = this.view.readUserSelect();
-        if (userId) {
-            const data = this.model.getData(userId);
-            const lang = this.view.readLangSelect();
-            this.view.displayList(data, lang);
-        }
-    }
-
-    handleFormSubmit() {
+    handleFormSubmit(event) {
+        event.preventDefault();
         this.view.clearErrors();
         if (!this.view.checkFormValidity()) {
             this.view.displayError("All field are required!");
@@ -47,7 +36,6 @@ export class Controller {
         const userId = this.model.getCurrentUser();
         const bookmarksList = this.model.addBookmark(userId, bookmark);
         this.view.resetForm();
-        const lang = this.view.readLangSelect();
-        this.view.displayList(bookmarksList, lang);
+        this.view.displayList(bookmarksList);
     }
 }

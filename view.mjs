@@ -3,7 +3,6 @@ export class View {
     constructor() {
         this.#elements = {
             usrSelect: document.getElementById("user_select"),
-            langSelect: document.getElementById("lang_select"),
             bookmarksList: document.getElementById("bookmarks_list"),
             formContainer: document.getElementById("left"),
             form: document.getElementById("form"),
@@ -82,12 +81,6 @@ export class View {
         this.addOptions(select, values)
     }
 
-    populateLangSelect() {
-        const select = this.#elements.langSelect;
-        this.addOptions(select, this.locales)
-        select.value = "en-GB";
-    }
-
     addOptions(select, values) {
         values.forEach(value => {
             const option = document.createElement("option");
@@ -103,25 +96,14 @@ export class View {
         });
     }
 
-    bindLangSelect(handler) {
-        this.#elements.langSelect.addEventListener("change", (event) => {
-            handler();
-        });
-    }
-
     bindFormSubmit(handler) {
         this.#elements.formSubmit.addEventListener("click", (event) => {
-            event.preventDefault();
-            handler();
+            handler(event);
         });
     }
 
     readUserSelect() {
         return this.#elements.usrSelect.value;
-    }
-
-    readLangSelect() {
-        return this.#elements.langSelect.value;
     }
 
     displayError(message) {
@@ -157,10 +139,10 @@ export class View {
         this.#elements.bookmarksList.innerHTML = "";
     }
 
-    formatDate(date, lang) {
+    formatDate(date) {
         date = new Date(date);
-        const timeOfDay = date.toLocaleTimeString(lang);
-        const calendarDate = date.toLocaleDateString(lang);
+        const timeOfDay = date.toLocaleTimeString();
+        const calendarDate = date.toLocaleDateString();
         return "Bookmark created: " + timeOfDay + " - " + calendarDate;
     }
 
